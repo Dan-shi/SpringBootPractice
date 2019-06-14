@@ -1,4 +1,4 @@
-package com.springboot.practice.readinglist;
+package com.springboot.practice.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

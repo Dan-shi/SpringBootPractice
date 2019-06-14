@@ -1,5 +1,6 @@
-package com.springboot.practice.readinglist;
+package com.springboot.practice.repository;
 
+import com.springboot.practice.bean.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
