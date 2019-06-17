@@ -1,18 +1,73 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="zh" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Login page</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Login page</h1>-->
+<!--<p th:if="${loginError}" class="error">用户名或密码错误</p>-->
+<!--<form th:action="@{/login.html}" method="post">-->
+    <!--<label for="username">Username</label>:-->
+    <!--<input type="text" id="username" name="username" autofocus="autofocus" /> <br />-->
+    <!--<label for="password">Password</label>:-->
+    <!--<input type="password" id="password" name="password" /> <br />-->
+    <!--<input type="submit" value="Login" />-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <base th:href="${#httpServletRequest.getContextPath()+'/'}">
     <meta charset="UTF-8">
-    <title>Login page</title>
+    <title>Title</title>
 </head>
 <body>
-<h1>Login page</h1>
+<h2>自定义登录页面</h2>
 <p th:if="${loginError}" class="error">用户名或密码错误</p>
-<form th:action="@{/login.html}" method="post">
-    <label for="username">Username</label>:
-    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
-    <label for="password">Password</label>:
-    <input type="password" id="password" name="password" /> <br />
-    <input type="submit" value="Login" />
+<form action="#" method="post">
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" id="username" name="username"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" id="password" name="password"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="button" onclick="login()">登录</button></td>
+        </tr>
+    </table>
+
 </form>
 </body>
+
+<!--<script src="/jquery-1.11.3.min.js"></script>-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.3.min.js}" ></script>
+<script type="text/javascript">
+    function login(){
+        $.ajax({
+            type: 'POST',
+            url: "/user/login",
+            data: {"username":$("#username").val(),"password":$("#password").val()},
+            // dataType: "json",
+            success: function(response){
+                if(response.data=="success"){
+                    window.location.href="readinglist";
+                }else{
+                    alert(response.msg);
+                }
+            },
+            error:function(response){
+                alert("失败");
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
 </html>

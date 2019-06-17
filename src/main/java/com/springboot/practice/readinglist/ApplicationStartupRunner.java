@@ -58,7 +58,7 @@ public class ApplicationStartupRunner implements CommandLineRunner {
 
         Resource resource = new Resource();
         resource.setResName("readinglist");
-        resource.setUrl("/readinglist");
+        resource.setUrl("/readingList");
         resourceRepository.save(resource);
 
         Role adRole = roleRepository.findByRoleName("Admin");

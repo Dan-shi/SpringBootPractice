@@ -39,6 +39,7 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for(Role role : roles) {
+            System.out.println("用户角色: "+role.getRoleName());
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
         return authorities;

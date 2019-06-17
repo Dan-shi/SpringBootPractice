@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import javax.sound.midi.Soundbank;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -21,16 +22,19 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
 
     @Override
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
-
+        System.out.println("decisionManager");
         //迭代器遍历目标url的权限列表
         Iterator<ConfigAttribute> iterator = collection.iterator();
         while (iterator.hasNext()) {
+            System.out.println("遍历");
             ConfigAttribute ca = iterator.next();
 
             String needRole = ca.getAttribute();
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
-                    throw new BadCredentialsException("未登录");
+                    System.out.println("用户未登录");
+                    //throw new BadCredentialsException("未登录");
+                    return;
                 } else
                     return;
             }
@@ -39,6 +43,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority authority : authorities) {
                 if (authority.getAuthority().equals(needRole)) {
+                    System.out.println("权限满足");
                     return;
                 }
             }
