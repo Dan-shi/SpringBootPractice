@@ -33,8 +33,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
                     System.out.println("用户未登录");
-                    //throw new BadCredentialsException("未登录");
-                    return;
+                    throw new BadCredentialsException("未登录");
                 } else
                     return;
             }
